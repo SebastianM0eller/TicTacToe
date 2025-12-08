@@ -11,7 +11,10 @@ public:
   ~GameBoard() = default;
 
   void printBoard() const;
-  void editBoard(int tileNumber, char playerSymbol);
+  void editBoard(int tile, char symbol);
+
+  bool hasPlayerWon(char symbol) const;
+  bool isBoardFull() const; // Is it a draw?
 
 private:
   char gameBoard[3][3];
