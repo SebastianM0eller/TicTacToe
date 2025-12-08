@@ -1,3 +1,5 @@
 # Clion Settings
 .idea
 
+# Build Folder
+build/

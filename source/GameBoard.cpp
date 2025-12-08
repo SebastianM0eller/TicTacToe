@@ -53,8 +53,8 @@ bool GameBoard::hasPlayerWon(const char symbol) const
   }
 
   // If none of the other are true, return the diagonal win-condition
-  return m_gameBoard[0][0] == m_gameBoard[1][1] == m_gameBoard[2][2] == symbol ||
-         m_gameBoard[0][2] == m_gameBoard[1][1] == m_gameBoard[2][0] == symbol;
+  return ((m_gameBoard[0][0] == m_gameBoard[1][1]) == m_gameBoard[2][2]) == symbol ||
+         ((m_gameBoard[0][2] == m_gameBoard[1][1]) == m_gameBoard[2][0]) == symbol;
 }
 
 bool GameBoard::isBoardFull() const
