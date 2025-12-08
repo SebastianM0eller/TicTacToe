@@ -5,15 +5,16 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+# --- Create Executable ---
+add_executable(${PROJECT_NAME} main.cpp)
+
 # --- Included files ---
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
+# --- Project source files ---
 target_sources(${PROJECT_NAME} PRIVATE
-    # Add source files here
+        source/GameBoard.cpp
 )
-
-# --- Create Executable ---
-add_executable(${PROJECT_NAME} main.cpp)
 
 # --- Compile Options ---
 target_compile_options(${PROJECT_NAME} PRIVATE
