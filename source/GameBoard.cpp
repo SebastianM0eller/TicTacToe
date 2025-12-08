@@ -73,6 +73,8 @@ bool GameBoard::isBoardFull() const
 
 bool GameBoard::isMoveValid(const int tile) const
 {
+  if (!tile) {return false;}
+
   // Check if it's within the area of the gameBoard
   if (tile < 1 || tile > 9)
   { return false; }

@@ -4,7 +4,7 @@
 
 #include "Game.h"
 #include <iostream>
-#include <cstdlib>
+#include <limits>
 
 Game::Game()
   : m_gameBoard() {}
@@ -34,17 +34,33 @@ void Game::printStatus() const
 int Game::getMove() const
 {
   std::cout << "Enter the tile number (1-9), you want to play: ";
+  int tile {0};
 
-  int tile;
-  std::cin >> tile;
-
-  while (!m_gameBoard.isMoveValid(tile))
+  // Keep trying to get an input until you get a valid input
+  while (true)
   {
-    std::cout << "Invalid move. Please enter a valid tile number: ";
-    std::cin >> tile;
-  }
+    // Check if the input you get is an integer
+    if (std::cin >> tile)
+    {
+      // Check if the integer is valid
+      if (m_gameBoard.isMoveValid(tile))
+      {
+        return tile;
+      }
 
-  return tile;
+      std::cout << "Invalid move. Please enter a valid tile number: ";
+    }
+    // If the input isn't an int
+    else
+    {
+      std::cout << "Invalid input. Please enter a number." << std::endl;
+
+      // Reset the input
+      std::cin.clear();
+      // Clear the buffer
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+  }
 }
 
 void Game::SwitchPlayer()
