@@ -13,9 +13,10 @@ public:
   void printBoard() const;
   void editBoard(int tile, char symbol);
 
-  bool hasPlayerWon(char symbol) const;
-  bool isBoardFull() const; // Is it a draw?
+  [[nodiscard]] bool hasPlayerWon(char symbol) const;
+  [[nodiscard]] bool isBoardFull() const; // Is it a draw?
+  [[nodiscard]] bool isMoveValid(int tile) const;
 
 private:
-  char gameBoard[3][3];
+  char m_gameBoard[3][3];
 };

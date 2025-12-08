@@ -3,9 +3,10 @@
 //
 
 #include <iostream>
-#include "GameBoard.h"
+#include "Game.h"
 
 int main()
 {
-  std::cout << "TicTacToe!" << std::endl;
+  Game TicTacToe;
+  TicTacToe.playGame();
 }

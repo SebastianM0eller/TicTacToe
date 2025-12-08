@@ -5,7 +5,7 @@
 #include "GameBoard.h"
 #include <iostream>
 
-GameBoard::GameBoard() : gameBoard()
+GameBoard::GameBoard() : m_gameBoard()
 {
   char tileNumber {'1'};
 
@@ -13,18 +13,18 @@ GameBoard::GameBoard() : gameBoard()
   {
     for (int column = 0; column <= 2; column++)
     {
-      gameBoard[row][column] = tileNumber++;
+      m_gameBoard[row][column] = tileNumber++;
     }
   }
 }
 
 void GameBoard::printBoard() const
 {
-  std::cout << gameBoard[0][0] << " | " << gameBoard[0][1] << " | " << gameBoard[0][2] << "\n";
+  std::cout << m_gameBoard[0][0] << " | " << m_gameBoard[0][1] << " | " << m_gameBoard[0][2] << "\n";
   std::cout << "--+---+--\n";
-  std::cout << gameBoard[1][0] << " | " << gameBoard[1][1] << " | " << gameBoard[1][2] << "\n";
+  std::cout << m_gameBoard[1][0] << " | " << m_gameBoard[1][1] << " | " << m_gameBoard[1][2] << "\n";
   std::cout << "--+---+--\n";
-  std::cout << gameBoard[2][0] << " | " << gameBoard[2][1] << " | " << gameBoard[2][2] << "\n";
+  std::cout << m_gameBoard[2][0] << " | " << m_gameBoard[2][1] << " | " << m_gameBoard[2][2] << "\n";
 }
 
 void GameBoard::editBoard(const int tile, const char symbol)
@@ -32,7 +32,7 @@ void GameBoard::editBoard(const int tile, const char symbol)
   const int row = (tile - 1) / 3;
   const int column = (tile - 1) % 3;
 
-  gameBoard[row][column] = symbol;
+  m_gameBoard[row][column] = symbol;
 }
 
 bool GameBoard::hasPlayerWon(const char symbol) const
@@ -41,20 +41,20 @@ bool GameBoard::hasPlayerWon(const char symbol) const
   // Check the vertical win-conditions
   for (int row = 0; row <= 2; row++)
   {
-    if (gameBoard[row][0] == symbol && gameBoard[row][1] == symbol && gameBoard[row][2] == symbol)
+    if (m_gameBoard[row][0] == symbol && m_gameBoard[row][1] == symbol && m_gameBoard[row][2] == symbol)
     { return true; }
   }
 
   // check the horizontal win-conditions
   for (int column = 0; column <= 2; column++)
   {
-    if (gameBoard[0][column] == symbol && gameBoard[1][column] == symbol && gameBoard[2][column] == symbol)
+    if (m_gameBoard[0][column] == symbol && m_gameBoard[1][column] == symbol && m_gameBoard[2][column] == symbol)
     { return true; }
   }
 
   // If none of the other are true, return the diagonal win-condition
-  return gameBoard[0][0] == gameBoard[1][1] == gameBoard[2][2] == symbol ||
-         gameBoard[0][2] == gameBoard[1][1] == gameBoard[2][0] == symbol;
+  return m_gameBoard[0][0] == m_gameBoard[1][1] == m_gameBoard[2][2] == symbol ||
+         m_gameBoard[0][2] == m_gameBoard[1][1] == m_gameBoard[2][0] == symbol;
 }
 
 bool GameBoard::isBoardFull() const
@@ -63,11 +63,27 @@ bool GameBoard::isBoardFull() const
   {
     for (int column = 0; column <= 2; column++)
     {
-      if (gameBoard[row][column] != 'X' && gameBoard[row][column] != 'O')
+      if (m_gameBoard[row][column] != 'X' && m_gameBoard[row][column] != 'O')
       { return false; } // If the tile is not X or O, it's not yet occupied
     }
   }
   // If the entire board consists of X of O, there a no playable spaces left.
+  return true;
+}
+
+bool GameBoard::isMoveValid(const int tile) const
+{
+  // Check if it's within the area of the gameBoard
+  if (tile < 1 || tile > 9)
+  { return false; }
+
+  // Check if the tile is already occupied
+  const int row = (tile - 1) / 3;
+  const int column = (tile - 1) % 3;
+
+  if (m_gameBoard[row][column] == 'X' || m_gameBoard[row][column] == 'O')
+  { return false; }
+
   return true;
 }
 
