@@ -18,4 +18,13 @@ cmake --build .
 
 ### How to play
 * Run the executable.
+* Choose a game mode (singleplayer or multiplayer).
 * Enjoy!
+
+## What i learned
+### The basics
+* How to use CMake to build a project
+* The basics of C++
+### Advanced
+* How to use the Random library
+* How to use the 'thread_local'

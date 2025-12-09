@@ -16,7 +16,6 @@ target_sources(${PROJECT_NAME} PRIVATE
         source/GameBoard.cpp
         source/Game.cpp
         source/GameAI.cpp
-        source/Random.cpp
 )
 
 # --- Compile Options ---
