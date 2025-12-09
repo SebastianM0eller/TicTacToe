@@ -8,5 +8,5 @@
 int main()
 {
   Game TicTacToe;
-  TicTacToe.playGame();
+  TicTacToe.playSinglePlayerGame();
 }

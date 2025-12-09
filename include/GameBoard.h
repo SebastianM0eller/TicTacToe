@@ -10,8 +10,8 @@ public:
   GameBoard();
   ~GameBoard() = default;
 
-  void printBoard() const;
-  void editBoard(int tile, char symbol);
+  void PrintBoard() const;
+  void EditBoard(int tile, char symbol);
 
   [[nodiscard]] bool hasPlayerWon(char symbol) const;
   [[nodiscard]] bool isBoardFull() const; // Is it a draw?

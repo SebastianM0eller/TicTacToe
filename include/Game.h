@@ -4,13 +4,15 @@
 
 #pragma once
 #include "GameBoard.h"
+#include "GameAI.h"
 
 class Game
 {
 public:
   Game();
   ~Game() = default;
-  void playGame();
+  void playCoopGame();
+  void playSinglePlayerGame();
 
 private:
   GameBoard m_gameBoard;
@@ -21,7 +23,7 @@ private:
   // Helper Functions
   void printStatus() const;
   [[nodiscard]] int getMove() const;
-  void SwitchPlayer();
-  bool CheckGameStatus();
+  void switchPlayer();
+  bool checkGameStatus();
   void clearConsole();
 };

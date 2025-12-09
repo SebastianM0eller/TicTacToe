@@ -18,7 +18,7 @@ GameBoard::GameBoard() : m_gameBoard()
   }
 }
 
-void GameBoard::printBoard() const
+void GameBoard::PrintBoard() const
 {
   std::cout << m_gameBoard[0][0] << " | " << m_gameBoard[0][1] << " | " << m_gameBoard[0][2] << "\n";
   std::cout << "--+---+--\n";
@@ -27,7 +27,7 @@ void GameBoard::printBoard() const
   std::cout << m_gameBoard[2][0] << " | " << m_gameBoard[2][1] << " | " << m_gameBoard[2][2] << "\n";
 }
 
-void GameBoard::editBoard(const int tile, const char symbol)
+void GameBoard::EditBoard(const int tile, const char symbol)
 {
   const int row = (tile - 1) / 3;
   const int column = (tile - 1) % 3;
@@ -53,8 +53,8 @@ bool GameBoard::hasPlayerWon(const char symbol) const
   }
 
   // If none of the other are true, return the diagonal win-condition
-  return ((m_gameBoard[0][0] == m_gameBoard[1][1]) == m_gameBoard[2][2]) == symbol ||
-         ((m_gameBoard[0][2] == m_gameBoard[1][1]) == m_gameBoard[2][0]) == symbol;
+  return (m_gameBoard[0][0] == symbol && m_gameBoard[1][1] == symbol && m_gameBoard[2][2] == symbol) ||
+         (m_gameBoard[0][2] == symbol && m_gameBoard[1][1] == symbol && m_gameBoard[2][0] == symbol);
 }
 
 bool GameBoard::isBoardFull() const

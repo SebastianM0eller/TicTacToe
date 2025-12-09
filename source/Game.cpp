@@ -9,25 +9,56 @@
 Game::Game()
   : m_gameBoard() {}
 
-void Game::playGame()
+void Game::playCoopGame()
 {
   clearConsole();
   m_isGameOver = false;
+
   while (!m_isGameOver)
   {
+    // Print the current status of the board
     printStatus();
-    int tile = getMove();
-    m_gameBoard.editBoard(tile, m_currentPlayer);
-    if (CheckGameStatus())
+
+    // Get the players move, and check if the game is over
+    m_gameBoard.EditBoard(getMove(), m_currentPlayer);
+    if (checkGameStatus())
     { break; }
-    SwitchPlayer();
+    switchPlayer();
+    clearConsole();
+  }
+}
+
+void Game::playSinglePlayerGame()
+{
+  GameAI ai(m_gameBoard, (m_currentPlayer == 'X') ? 'O' : 'X');
+  clearConsole();
+  m_isGameOver = false;
+
+  while (!m_isGameOver)
+  {
+    // Print the current board
+    printStatus();
+
+    // Get the players move and check if the game is over
+    m_gameBoard.EditBoard(getMove(), m_currentPlayer);
+    if (checkGameStatus())
+    { break; }
+
+    // Now let the AI take its turn and check if the game is over
+    switchPlayer();
+    ai.makeMove();
+    if (checkGameStatus())
+    { break; }
+
+    // Switch back to the player
+    switchPlayer();
     clearConsole();
   }
 }
 
 void Game::printStatus() const
 {
-  m_gameBoard.printBoard();
+  m_gameBoard.PrintBoard();
   std::cout << "Current Player: " << m_currentPlayer << "\n";
 }
 
@@ -63,17 +94,17 @@ int Game::getMove() const
   }
 }
 
-void Game::SwitchPlayer()
+void Game::switchPlayer()
 {
   m_currentPlayer = (m_currentPlayer == 'X') ? 'O' : 'X';
 }
 
-bool Game::CheckGameStatus()
+bool Game::checkGameStatus()
 {
   if (m_gameBoard.hasPlayerWon(m_currentPlayer))
   {
     clearConsole();
-    m_gameBoard.printBoard();
+    m_gameBoard.PrintBoard();
 
     std::cout << m_currentPlayer << " has won!\n";
     m_isGameOver = true;
@@ -83,7 +114,7 @@ bool Game::CheckGameStatus()
   if (m_gameBoard.isBoardFull())
   {
     clearConsole();
-    m_gameBoard.printBoard();
+    m_gameBoard.PrintBoard();
 
     std::cout << "It's a draw!\n";
     m_isGameOver = true;
