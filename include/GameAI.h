@@ -4,6 +4,7 @@
 
 #pragma once
 #include "GameBoard.h"
+#include <random>
 
 class GameAI
 {
@@ -12,6 +13,7 @@ class GameAI
     ~GameAI() = default;
 
   void makeMove();
+  char getSymbol() const { return m_symbol; }
 
 private:
   GameBoard& m_gameBoard;

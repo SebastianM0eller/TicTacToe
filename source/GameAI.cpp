@@ -3,9 +3,7 @@
 //
 
 #include "GameAI.h"
-
-#include <cstdlib>
-#include <stdlib.h>
+#include "Random.h"
 
 GameAI::GameAI(GameBoard& gameBoard, const char symbol)
   : m_gameBoard(gameBoard), m_symbol(symbol) {}
@@ -54,7 +52,7 @@ int GameAI::pickRandomMove()
   int move = 0;
 
   while (!m_gameBoard.isMoveValid(move))
-     move = rand() % 9 + 1;
+     move = Random::getRandomInt(1,9);
 
   return move;
 }

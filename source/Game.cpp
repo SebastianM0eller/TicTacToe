@@ -3,6 +3,7 @@
 //
 
 #include "Game.h"
+#include "Random.h"
 #include <iostream>
 #include <limits>
 
@@ -11,31 +12,43 @@ Game::Game()
 
 void Game::playCoopGame()
 {
-  clearConsole();
   m_isGameOver = false;
 
   while (!m_isGameOver)
   {
+    clearConsole();
+
     // Print the current status of the board
     printStatus();
 
-    // Get the players move, and check if the game is over
+    // Get the players move and check if the game is over
     m_gameBoard.EditBoard(getMove(), m_currentPlayer);
     if (checkGameStatus())
     { break; }
+
     switchPlayer();
-    clearConsole();
   }
 }
 
 void Game::playSinglePlayerGame()
 {
+  // Decide who starts at random
+  if (Random::getRandomInt(0,1) == 0) { switchPlayer(); }
+
   GameAI ai(m_gameBoard, (m_currentPlayer == 'X') ? 'O' : 'X');
-  clearConsole();
   m_isGameOver = false;
+
+  // If the AI is the "X" it should have the first turn.
+  if (ai.getSymbol() == 'X')
+  {
+    ai.makeMove();
+  }
 
   while (!m_isGameOver)
   {
+    // Clear the console
+    clearConsole();
+
     // Print the current board
     printStatus();
 
@@ -52,7 +65,6 @@ void Game::playSinglePlayerGame()
 
     // Switch back to the player
     switchPlayer();
-    clearConsole();
   }
 }
 
