@@ -11,6 +11,7 @@ class Game
 public:
   Game();
   ~Game() = default;
+  void Run();
   void playCoopGame();
   void playSinglePlayerGame();
 

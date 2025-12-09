@@ -10,6 +10,17 @@
 Game::Game()
   : m_gameBoard() {}
 
+void Game::Run()
+{
+  int playerSelect {0};
+  std::cout << "Welcome to Tic Tac Toe!\n";
+  std::cout << "Would you like to play against the AI or against a friend? (1/2)\n";
+  std::cin >> playerSelect;
+
+  if (playerSelect == 2) { playCoopGame(); }
+  else { playSinglePlayerGame(); }
+}
+
 void Game::playCoopGame()
 {
   m_isGameOver = false;

@@ -8,5 +8,5 @@
 int main()
 {
   Game TicTacToe;
-  TicTacToe.playSinglePlayerGame();
+  TicTacToe.Run();
 }
