@@ -19,6 +19,8 @@ private:
   GameBoard m_gameBoard;
 
   bool m_isGameOver {true};
+
+  // The current player is initialized as X, as X starts
   char m_currentPlayer {'X'};
 
   // Helper Functions

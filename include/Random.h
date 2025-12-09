@@ -8,7 +8,7 @@
 class Random
 {
 public:
-  static int getRandomInt(int min, int max)
+  static int getRandomInt(const int min, const int max)
   {
     // Creates the variables ones per thread to reuse later.
     thread_local std::random_device rd;
