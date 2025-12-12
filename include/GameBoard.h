@@ -3,6 +3,7 @@
 //
 
 #pragma once
+#include <vector>
 
 class GameBoard
 {
@@ -19,4 +20,5 @@ public:
 
 private:
   char m_gameBoard[3][3];
+  std::vector<int> m_validMoves;
 };

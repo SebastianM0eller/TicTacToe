@@ -4,16 +4,19 @@
 
 #include "GameBoard.h"
 #include <iostream>
+#include <algorithm>
 
 GameBoard::GameBoard() : m_gameBoard()
 {
-  char tileNumber {'1'};
+  char tileChar {'1'};
+  int tileNumber {1};
 
   for (int row = 0; row <= 2; row++)
   {
     for (int column = 0; column <= 2; column++)
     {
-      m_gameBoard[row][column] = tileNumber++;
+      m_gameBoard[row][column] = tileChar++;
+      m_validMoves.push_back(tileNumber++);
     }
   }
 }
@@ -33,6 +36,7 @@ void GameBoard::EditBoard(const int tile, const char symbol)
   const int column = (tile - 1) % 3;
 
   m_gameBoard[row][column] = symbol;
+  std::erase(m_validMoves, tile);
 }
 
 bool GameBoard::hasPlayerWon(const char symbol) const
@@ -73,20 +77,7 @@ bool GameBoard::isBoardFull() const
 
 bool GameBoard::isMoveValid(const int tile) const
 {
-  if (!tile) {return false;}
-
-  // Check if it's within the area of the gameBoard
-  if (tile < 1 || tile > 9)
-  { return false; }
-
-  // Check if the tile is already occupied
-  const int row = (tile - 1) / 3;
-  const int column = (tile - 1) % 3;
-
-  if (m_gameBoard[row][column] == 'X' || m_gameBoard[row][column] == 'O')
-  { return false; }
-
-  return true;
+  return std::ranges::find(m_validMoves, tile) != m_validMoves.end();
 }
 
 
